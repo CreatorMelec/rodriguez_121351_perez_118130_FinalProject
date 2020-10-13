@@ -1,20 +1,19 @@
 from graphics import *
 from game import Game
 from dieview import DieView
+from board import Board
 
 
 def main():
 
 
     win = GraphWin("Parchessi", 820, 620)
-    player = Game()
+    field = Board()
+    game = Game()
 
-    viewDice = DieView(win,Point(690.0, 120.0), 50)
-    viewDice.setValue(6)
-    viewDice2 = DieView(win,Point(760.0, 120.0), 50)
-    viewDice2.setValue(3)
+    field.board(win)
+    game.playGame(win)
 
-    player.board(win)
 
     win.getMouse()
     win.close()
