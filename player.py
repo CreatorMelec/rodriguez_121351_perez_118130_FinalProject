@@ -58,6 +58,8 @@ class Player:
                 circleOb = movedCircle
                 diceVal -= 1
                 remSteps -= 1
+                if remSteps == 0:
+                    self.redPieces += 1
 
             if circleOb.getCenter().getX() == 285.0 and 285 < circleOb.getCenter().getY() <= 465 and color == "blue" and 0 < remSteps <= 6:
                 movedCircle = Circle(Point(circleOb.getCenter().getX(), circleOb.getCenter().getY() - 30), 5)
@@ -67,6 +69,8 @@ class Player:
                 circleOb = movedCircle
                 diceVal -= 1
                 remSteps -= 1
+                if remSteps == 0:
+                    self.redPieces += 1
                 
 
             if 315 < circleOb.getCenter().getX() <= 495 and circleOb.getCenter().getY() == 255 and color == "green" and 0 < remSteps <= 6:
@@ -77,6 +81,8 @@ class Player:
                 circleOb = movedCircle
                 diceVal -= 1
                 remSteps -= 1
+                if remSteps == 0:
+                    self.redPieces += 1
 
             
 
@@ -224,13 +230,6 @@ class Player:
                 diceVal -= 1
                 remSteps -= 1
 
-    #def piecesInHome(self):
-            #if(self.chips[0].returnSteps() and self.chips[1].returnSteps() and
-            #self.chips[2].returnSteps() and self.chips[3].returnSteps()):
-                #return True
-
-            #else:
-                #return False
 
     def drawPlayer(self, color, win):
         if color == "red":

@@ -15,7 +15,7 @@ def main():
     game.playGame(win)
 
 
-    win.getMouse()
-    win.close()
+    #win.getMouse()
+    #win.close()
 
 main()

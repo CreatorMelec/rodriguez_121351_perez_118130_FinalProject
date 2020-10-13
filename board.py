@@ -1,4 +1,5 @@
 from graphics import * 
+from Buttons import Button
 
 class Board:
 
@@ -120,20 +121,6 @@ class Board:
         rightMenu = Line(Point(620.0, 0.0), Point(620.0, 620.0))
         rightMenu.draw(win)
 
-        self.menuOption(win)
 
-    def menuOption(self, win):
 
-        rollSquare = Rectangle(Point(680.0, 45.0), Point(760.0, 75.0))
-        rollSquare.setFill("gray")
-        rollSquare.draw(win)
-
-        rollDice = Text(Point(720.0 ,60.0), "Roll Dice")
-        rollDice.draw(win)
-
-        quitSquare = Rectangle(Point(680.0, 510.0), Point(760.0, 540.0))
-        quitSquare.setFill("gray")
-        quitSquare.draw(win)
-
-        quitButton = Text(Point(720.0 , 525.0), "Quit")
-        quitButton.draw(win)
+   
