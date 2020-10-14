@@ -15,13 +15,7 @@ class Game:
         for x in range(4):
             self.players.append(Player())
 
-
     def playGame(self, win):
-
-        self.players[0].drawPlayer("red", win)
-        self.players[1].drawPlayer("blue", win)
-        self.players[2].drawPlayer("green", win)
-        self.players[3].drawPlayer("yellow", win)
 
         remSteps = chip()
 
@@ -32,15 +26,21 @@ class Game:
 
         pt = win.getMouse()
 
-
         while not quitButton.clicked(pt):
 
             for i in range(4):
-                  
                 if i == 0:
                     if rollButton.clicked(pt):
-                        sumDie = self.rollDice(win)
-                        self.player.MovePiece(self.players[0].player, sumDie, "red", remSteps.returnSteps(), win)
+                        print("red")
+                        dice1, dice2 = self.rollDice(win)
+                        if self.player.returnChips() > 0:
+                            checkMove, dice = self.startHome(dice1, dice2, "red", win)
+                            if checkMove:
+                                sumDie = dice
+                                self.player.MovePiece(self.players[0].player, sumDie, "red", remSteps.returnSteps(), win)          
+                        elif self.player.returnChips() == 0:
+                            sumDie = dice1 + dice2
+                            self.player.MovePiece(self.players[0].player, sumDie, "red", remSteps.returnSteps(), win)
                         if self.playerWon(win):
                             win.getMouse()
                             win.close()
@@ -48,35 +48,68 @@ class Game:
 
                 elif i == 1:
                     if rollButton.clicked(pt):
-                        sumDie = self.rollDice(win)
-                        self.player.MovePiece(self.players[1].player, sumDie, "blue", remSteps.returnSteps(), win)
+                        print("blue")
+                        dice1, dice2 = self.rollDice( win)
+                        if self.player.returnChips() > 0:
+                            checkMove, dice = self.startHome(dice1, dice2, "blue", win)
+                            if checkMove:
+                                sumDie = dice
+                                self.player.MovePiece(self.players[1].player, sumDie, "blue", remSteps.returnSteps(), win)
+                                        
+                        elif self.player.returnChips() == 0:
+                            sumDie = dice1 + dice2
+                            self.player.MovePiece(self.players[1].player, sumDie, "blue", remSteps.returnSteps(), win)
+                                
                         if self.playerWon(win):
                             win.getMouse()
                             win.close()
                         pt = win.getMouse()
 
+                
                 elif i == 2:
                     if rollButton.clicked(pt):
-                        sumDie = self.rollDice(win)
-                        self.player.MovePiece(self.players[2].player, sumDie, "green", remSteps.returnSteps(), win)
+                        print("green")
+                        dice1, dice2 = self.rollDice(win)
+                                
+                        if self.player.returnChips() > 0:
+                            checkMove, dice = self.startHome(dice1, dice2, "green", win)
+                            if checkMove:
+                                sumDie = dice
+                                self.player.MovePiece(self.players[2].player, sumDie, "green", remSteps.returnSteps(), win)
+                                        
+                        elif self.player.returnChips() == 0:
+                            sumDie = dice1 + dice2
+                            self.player.MovePiece(self.players[2].player, sumDie, "green", remSteps.returnSteps(), win)
+                                
                         if self.playerWon(win):
                             win.getMouse()
                             win.close()
-                            
-                        pt = win.getMouse()
+                                        
+                            pt = win.getMouse()
 
-                else:
+                elif i == 3:
                     if rollButton.clicked(pt):
-                        sumDie = self.rollDice(win)
-                        self.player.MovePiece(self.players[3].player, sumDie, "yellow", remSteps.returnSteps(), win)
+                        print("yellow")
+                        dice1, dice2 = self.rollDice(win)    
+                        if self.player.returnChips() > 0:
+                            checkMove, dice = self.startHome(dice1, dice2, "yellow", win)
+                            if checkMove:
+                                sumDie = dice
+                                self.player.MovePiece(self.players[3].player, sumDie, "yellow", remSteps.returnSteps(), win)
+                                    
+                        elif self.player.returnChips() == 0:
+                            sumDie = dice1 + dice2
+                            self.player.MovePiece(self.players[3].player, sumDie, "yellow", remSteps.returnSteps(), win)
+                        
                         if self.playerWon(win):
                             win.getMouse()
                             win.close()
-                            
+                        
                         pt = win.getMouse()
                 
                 
-                
+
+                      
             
     def playerWon(self, win):
 
@@ -95,16 +128,54 @@ class Game:
         dado = Dice()
         dado.rollDie()
         diceVal = dado.diceValue()
-
         viewDice = DieView(win,Point(690.0, 120.0), 50)
         viewDice.setValue(diceVal)
         dado.rollDie()
         diceVal2 = dado.diceValue()
         viewDice2 = DieView(win,Point(760.0, 120.0), 50)
         viewDice2.setValue(diceVal2)
+        return diceVal, diceVal2
 
+    def startHome(self, diceVal, diceVal2, color, win):
 
-        return diceVal + diceVal2
+        if diceVal == 5 or diceVal2 == 5 and color == "red":        
+            self.players[0].drawPlayer("red", win)
+            if diceVal == 5:
+                self.player.updateChips()
+                return True, diceVal2
+            else: 
+                return True, diceVal
+        if diceVal == 5 or diceVal2 == 5 and color == "blue":
+            self.players[1].drawPlayer("blue", win)
+            if diceVal == 5:
+                self.player.updateChips()
+                return True, diceVal2
+            else: 
+                return True, diceVal
+        if diceVal == 5 or diceVal2 == 5 and color == "green":
+            self.players[2].drawPlayer("green", win)
+            if diceVal == 5:
+                self.player.updateChips()
+                return True, diceVal2
+            else: 
+                return True, diceVal
+        if diceVal == 5 or diceVal2 == 5 and color == "yellow":
+            self.players[3].drawPlayer("yellow", win)
+            if diceVal == 5:
+                self.player.updateChips()
+                return True, diceVal2
+            else: 
+                return True, diceVal
+        else:
+            skip = Text(Point(720.0, 300), "Next player's turn")
+            skip.setStyle("bold")
+            skip.setSize(16)
+            skip.draw(win)
+            win.getMouse()
+            skip.undraw()
+                
+            moveDice = diceVal + diceVal2
+            return False, moveDice
                 
 
 
