@@ -33,46 +33,66 @@ class Game:
         pt = win.getMouse()
 
 
-        while not quitButton.clicked(pt) or self.playerWon(win):
-        
+        while not quitButton.clicked(pt):
 
-            if self.players[0]:
-                if rollButton.clicked(pt):
-                    sumDie = self.rollDice(win)
-                    self.player.MovePiece(self.players[0].player, sumDie, "red", remSteps.returnSteps(), win)
+            for i in range(4):
+                  
+                if i == 0:
+                    if rollButton.clicked(pt):
+                        sumDie = self.rollDice(win)
+                        self.player.MovePiece(self.players[0].player, sumDie, "red", remSteps.returnSteps(), win)
+                        if self.playerWon(win):
+                            win.getMouse()
+                            win.close()
+                        pt = win.getMouse()
 
-            if self.players[1]:
-                if rollButton.clicked(pt):
-                    sumDie = self.rollDice(win)
-                    self.player.MovePiece(self.players[1].player, sumDie, "blue", remSteps.returnSteps(), win)
+                elif i == 1:
+                    if rollButton.clicked(pt):
+                        sumDie = self.rollDice(win)
+                        self.player.MovePiece(self.players[1].player, sumDie, "blue", remSteps.returnSteps(), win)
+                        if self.playerWon(win):
+                            win.getMouse()
+                            win.close()
+                        pt = win.getMouse()
 
-            if self.players[2]:
-                if rollButton.clicked(pt):
+                elif i == 2:
+                    if rollButton.clicked(pt):
+                        sumDie = self.rollDice(win)
+                        self.player.MovePiece(self.players[2].player, sumDie, "green", remSteps.returnSteps(), win)
+                        if self.playerWon(win):
+                            win.getMouse()
+                            win.close()
+                            
+                        pt = win.getMouse()
 
-                    self.player.MovePiece(self.players[2].player, sumDie, "green", remSteps.returnSteps(), win)
-
-            if self.players[1]:
-                if rollButton.clicked(pt):
-
-                    self.player.MovePiece(self.players[3].player, sumDie, "yellow", remSteps.returnSteps(), win)
-
-            pt = win.getMouse()
-
-
+                else:
+                    if rollButton.clicked(pt):
+                        sumDie = self.rollDice(win)
+                        self.player.MovePiece(self.players[3].player, sumDie, "yellow", remSteps.returnSteps(), win)
+                        if self.playerWon(win):
+                            win.getMouse()
+                            win.close()
+                            
+                        pt = win.getMouse()
+                
+                
+                
             
     def playerWon(self, win):
+
         playerPiece = self.player.returnRed()
-        print(self.player.returnRed)
         if self.player.piecesInHome(playerPiece):
             winner = Text(Point(720.0, 300), "You WON!")
             winner.setStyle("bold")
             winner.setSize(26)
             winner.draw(win)
             return True
+        else:
+            return False
             
     def rollDice(self, win):
-        dado = Dice()
 
+        dado = Dice()
         dado.rollDie()
         diceVal = dado.diceValue()
 

@@ -231,6 +231,9 @@ class Player:
                 remSteps -= 1
 
 
+            
+
+
     def drawPlayer(self, color, win):
         if color == "red":
             self.player = Circle(Point(105.0, 225.0), 5)
@@ -252,6 +255,7 @@ class Player:
             self.player.setFill(color)
             self.player.setOutline("black")
             self.player.draw(win)
+
 
     def returnRed(self):
         return self.redPieces
