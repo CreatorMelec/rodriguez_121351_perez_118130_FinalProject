@@ -13,7 +13,7 @@ class Player:
         self.homePieces = 1
         self.availableChips = 1
         self.player = Circle(Point(0,0), 5)
-        self.redPieces = 0
+        self.pieces = 0
         self.remainingSteps = 60
 
     def returnChips(self):
@@ -38,23 +38,24 @@ class Player:
 
     def MovePiece(self, circleOb ,diceVal,color,remSteps, win): #remSteps = 80
         while diceVal != 0:
+            print(diceVal)
             if 75 <= circleOb.getCenter().getX() < 255 and circleOb.getCenter().getY() == 255 and color == "red"  and 0 < self.returnSteps() <= 6:
                 circleOb.move(30.0,0.0)
                 diceVal -= 1
                 if remSteps == 0:
-                    self.redPieces += 1    
+                    self.pieces += 1    
             
             if circleOb.getCenter().getX() == 285.0 and 45 <= circleOb.getCenter().getY() < 225 and color == "yellow" and 0 < self.returnSteps() <= 6:
                 circleOb.move(0.0, 30.0)
                 diceVal -= 1
                 if remSteps == 0:
-                    self.redPieces += 1
+                    self.pieces += 1
 
             if circleOb.getCenter().getX() == 285.0 and 285 < circleOb.getCenter().getY() <= 465 and color == "blue" and 0 < self.returnSteps() <= 6:
                 circleOb.move(0.0, -30.0)
                 diceVal -= 1
                 if remSteps == 0:
-                    self.redPieces += 1
+                    self.pieces += 1
                 
 
             if 315 < circleOb.getCenter().getX() <= 495 and circleOb.getCenter().getY() == 255 and color == "green" and 0 < self.returnSteps() <= 6:
@@ -62,7 +63,7 @@ class Player:
                 
                 diceVal -= 1
                 if remSteps == 0:
-                    self.redPieces += 1
+                    self.pieces += 1
 
             
 
@@ -173,8 +174,8 @@ class Player:
             self.player.draw(win)
 
 
-    def returnRed(self):
-        return self.redPieces
+    def returnPieces(self):
+        return self.pieces
 
             
             
