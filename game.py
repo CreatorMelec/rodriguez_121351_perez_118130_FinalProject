@@ -24,11 +24,11 @@ class Game:
         quitButton.activate()
 
         pt = win.getMouse()
-        #turn = 0
+        turn = 0
 
         while not quitButton.clicked(pt):
 
-           if turn == 0:
+            if turn == 0:
                 if self.playerWon(win):
                     win.getMouse()
                     win.close()
@@ -38,18 +38,18 @@ class Game:
                     if self.players[0].returnChips() > 0:
                         checkMove, dice = self.startHome(dice1, dice2, "red", win)
                         if checkMove:
-                            sumDie = dice
-                            self.player.MovePiece(self.players[0].player, sumDie, "red", self.players[0].returnSteps(), win)     
+                         
+                            self.players[0].MovePiece(self.players[0].player, dice, "red", self.players[0].returnSteps(), win)     
                             
                     elif self.players[0].returnChips() == 0:
-                        sumDie = dice1 + dice2
-                        self.player.MovePiece(self.players[0].player, sumDie, "red", self.players[0].returnSteps(), win)
+                        dice = dice1 + dice2 
+                        self.players[0].MovePiece(self.players[0].player, dice, "red", self.players[0].returnSteps(), win)
                             
                 pt = win.getMouse()
                 turn += 1
                 print(turn)
 
-            elif turn == 1:
+            if turn == 1:
                 if self.playerWon(win):
                     win.getMouse()
                     win.close()
@@ -59,19 +59,19 @@ class Game:
                     if self.players[1].returnChips() > 0:
                         checkMove, dice = self.startHome(dice1, dice2, "blue", win)
                         if checkMove:
-                            sumDie = dice
-                            self.player.MovePiece(self.players[1].player, sumDie, "blue", self.players[1].returnSteps(), win)
+                        
+                            self.players[1].MovePiece(self.players[1].player, dice, "blue", self.players[1].returnSteps(), win)
                                           
                     elif self.players[1].returnChips() == 0:
-                        sumDie = dice1 + dice2
-                        self.player.MovePiece(self.players[1].player, sumDie, "blue", self.players[1].returnSteps(), win)
+                        dice = dice1 + dice2 
+                        self.players[1].MovePiece(self.players[1].player, dice, "blue", self.players[1].returnSteps(), win)
                           
                 pt = win.getMouse()
                 turn += 1
                 print(turn)
 
                 
-            elif turn == 2:
+            if turn == 2:
                 if self.playerWon(win):
                             win.getMouse()
                             win.close()
@@ -81,18 +81,18 @@ class Game:
                     if self.players[2].returnChips() > 0:
                         checkMove, dice = self.startHome(dice1, dice2, "green", win)
                         if checkMove:
-                            sumDie = dice
-                            self.player.MovePiece(self.players[2].player, sumDie, "green", self.players[2].returnSteps(), win)
+                            
+                            self.players[2].MovePiece(self.players[2].player, dice, "green", self.players[2].returnSteps(), win)
                                     
                     elif self.players[2].returnChips() == 0:
-                        sumDie = dice1 + dice2
-                        self.player.MovePiece(self.players[2].player, sumDie, "green", self.players[2].returnSteps(), win)
+                        dice = dice1 + dice2     
+                        self.players[2].MovePiece(self.players[2].player, dice, "green", self.players[2].returnSteps(), win)
                                   
                 pt = win.getMouse()
                 turn += 1
                 print(turn)
 
-            elif turn == 3:
+            if turn == 3:
                 if self.playerWon(win):
                         win.getMouse()
                         win.close()
@@ -102,18 +102,19 @@ class Game:
                     if self.players[3].returnChips() > 0:
                         checkMove, dice = self.startHome(dice1, dice2, "yellow", win)
                         if checkMove:
-                            sumDie = dice
-                            self.player.MovePiece(self.players[3].player, sumDie, "yellow", self.players[3].returnSteps(), win)
+                            
+                            self.players[3].MovePiece(self.players[3].player, dice, "yellow", self.players[3].returnSteps(), win)
                                 
                     elif self.players[3].returnChips() == 0:
-                        sumDie = dice1 + dice2
-                        self.player.MovePiece(self.players[3].player, sumDie, "yellow", self.players[3].returnSteps(), win)
+                        dice = dice1 + dice2  
+                        self.players[3].MovePiece(self.players[3].player, dice, "yellow", self.players[3].returnSteps(), win)
                                 
                 pt = win.getMouse()
                 turn += 1
                 print(turn)
                     
-            elif turn == 4:
+            if turn == 4:
+                pt = win.getMouse()
                 turn = 0
                 print(turn)
 
@@ -147,34 +148,39 @@ class Game:
 
     def startHome(self, diceVal, diceVal2, color, win):
 
-        if diceVal == 5 or diceVal2 == 5 and color == "red":        
-            self.players[0].drawPlayer("red", win)
-            if diceVal == 5:
-                self.player.updateChips()
-                return True, diceVal2
-            else: 
-                return True, diceVal
-        elif diceVal == 5 or diceVal2 == 5 and color == "blue":
-            self.players[1].drawPlayer("blue", win)
-            if diceVal == 5:
-                self.player.updateChips()
-                return True, diceVal2
-            else: 
-                return True, diceVal
-        elif diceVal == 5 or diceVal2 == 5 and color == "green":
-            self.players[2].drawPlayer("green", win)
-            if diceVal == 5:
-                self.player.updateChips()
-                return True, diceVal2
-            else: 
-                return True, diceVal
-        elif diceVal == 5 or diceVal2 == 5 and color == "yellow":
-            self.players[3].drawPlayer("yellow", win)
-            if diceVal == 5:
-                self.player.updateChips()
-                return True, diceVal2
-            else: 
-                return True, diceVal
+        if diceVal == 5 or diceVal2 == 5: 
+            if color == "red":       
+                self.players[0].drawPlayer("red", win)
+                if diceVal == 5:
+                    self.players[0].updateChips()
+                    return True, diceVal2
+                else: 
+                    self.players[0].updateChips()
+                    return True, diceVal
+            elif color == "blue":
+                self.players[1].drawPlayer("blue", win)
+                if diceVal == 5:
+                    self.players[1].updateChips()
+                    return True, diceVal2
+                else: 
+                    self.players[1].updateChips()
+                    return True, diceVal
+            elif color == "green":
+                self.players[2].drawPlayer("green", win)
+                if diceVal == 5:
+                    self.players[2].updateChips()
+                    return True, diceVal2
+                else: 
+                    self.players[2].updateChips()
+                    return True, diceVal
+            elif color == "yellow":
+                self.players[3].drawPlayer("yellow", win)
+                if diceVal == 5:
+                    self.players[3].updateChips()
+                    return True, diceVal2
+                else: 
+                    self.players[3].updateChips()
+                    return True, diceVal
         else:
             skip = Text(Point(720.0, 300), "Next player's turn")
             skip.setStyle("bold")
