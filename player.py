@@ -14,6 +14,7 @@ class Player:
         self.availableChips = 1
         self.player = Circle(Point(0,0), 5)
         self.redPieces = 0
+        self.remainingSteps = 60
 
     def returnChips(self):
         return self.availableChips
@@ -27,36 +28,39 @@ class Player:
         else:
             return False
 
+    def updateSteps(self,takenSteps):
+        
+        self.remainingSteps -= takenSteps
+        
+    def returnSteps(self):
+        return self.remainingSteps
+
+
     def MovePiece(self, circleOb ,diceVal,color,remSteps, win): #remSteps = 80
         while diceVal != 0:
-
-            if 75 <= circleOb.getCenter().getX() < 255 and circleOb.getCenter().getY() == 255 and color == "red"  and 0 < remSteps <= 6:
+            if 75 <= circleOb.getCenter().getX() < 255 and circleOb.getCenter().getY() == 255 and color == "red"  and 0 < self.returnSteps() <= 6:
                 circleOb.move(30.0,0.0)
                 diceVal -= 1
-                remSteps -= 1
                 if remSteps == 0:
-                    self.redPieces += 1
-                    
+                    self.redPieces += 1    
             
-            if circleOb.getCenter().getX() == 285.0 and 45 <= circleOb.getCenter().getY() < 225 and color == "yellow" and 0 < remSteps <= 6:
+            if circleOb.getCenter().getX() == 285.0 and 45 <= circleOb.getCenter().getY() < 225 and color == "yellow" and 0 < self.returnSteps() <= 6:
                 circleOb.move(0.0, 30.0)
                 diceVal -= 1
-                remSteps -= 1
                 if remSteps == 0:
                     self.redPieces += 1
 
-            if circleOb.getCenter().getX() == 285.0 and 285 < circleOb.getCenter().getY() <= 465 and color == "blue" and 0 < remSteps <= 6:
+            if circleOb.getCenter().getX() == 285.0 and 285 < circleOb.getCenter().getY() <= 465 and color == "blue" and 0 < self.returnSteps() <= 6:
                 circleOb.move(0.0, -30.0)
                 diceVal -= 1
-                remSteps -= 1
                 if remSteps == 0:
                     self.redPieces += 1
                 
 
-            if 315 < circleOb.getCenter().getX() <= 495 and circleOb.getCenter().getY() == 255 and color == "green" and 0 < remSteps <= 6:
+            if 315 < circleOb.getCenter().getX() <= 495 and circleOb.getCenter().getY() == 255 and color == "green" and 0 < self.returnSteps() <= 6:
                 circleOb.move(-30.0, 0.0)
+                
                 diceVal -= 1
-                remSteps -= 1
                 if remSteps == 0:
                     self.redPieces += 1
 
@@ -64,83 +68,85 @@ class Player:
 
             elif  (75 < circleOb.getCenter().getX() <= 225) and circleOb.getCenter().getY() == 225.0:
                 circleOb.move(-30,0)
+                
                 diceVal -= 1
-                remSteps -= 1
 
             elif circleOb.getCenter().getX() == 75.0 and (225 <= circleOb.getCenter().getY() < 285.0):
                 circleOb.move(0,30.0)
+                
                 diceVal -= 1
-                remSteps -= 1
 
             elif circleOb.getCenter().getY() == 285.0 and (75 <= circleOb.getCenter().getX() < 225.0):
                 circleOb.move(30.0, 0)
+               
                 diceVal -= 1
-                remSteps -= 1
 
             elif circleOb.getCenter().getX() == 225 and circleOb.getCenter().getY() == 285.0:
                 circleOb.move(30,30)
+                
                 diceVal -= 1
-                remSteps -= 1
             
             elif circleOb.getCenter().getX() == 255.0 and (315 <= circleOb.getCenter().getY() < 465):
                 circleOb.move(0,30)
+                
                 diceVal -= 1
-                remSteps -= 1
 
             elif circleOb.getCenter().getY() == 465 and (255 <= circleOb.getCenter().getX() < 315):
                 circleOb.move(30,0)
+                
                 diceVal -= 1
-                remSteps -= 1
 
             elif circleOb.getCenter().getX() == 315.0 and (315 < circleOb.getCenter().getY() <= 465):
                 circleOb.move(0,-30)
+                
                 diceVal -= 1
-                remSteps -= 1
 
             elif circleOb.getCenter().getY() == 315 and (255 < circleOb.getCenter().getX() <= 315):
                 circleOb.move(30,-30)
+                
                 diceVal -= 1
-                remSteps -= 1
 
             elif (345 <= circleOb.getCenter().getX() < 495) and circleOb.getCenter().getY() == 285:
                 circleOb.move(30,0)
+                
                 diceVal -= 1
-                remSteps -= 1
             
             elif circleOb.getCenter().getX() == 495 and (225 < circleOb.getCenter().getY() <= 285):
                 circleOb.move(0,-30)
+                
                 diceVal -= 1
-                remSteps -= 1
             
             elif circleOb.getCenter().getY() == 225 and (345 < circleOb.getCenter().getX() <= 495):
                 circleOb.move(-30,0)
+                
                 diceVal -= 1
-                remSteps -= 1
             
             elif circleOb.getCenter().getX() == 345 and circleOb.getCenter().getY() == 225:
                 circleOb.move(-30,-30)
+                
                 diceVal -= 1
-                remSteps -= 1
             
             elif circleOb.getCenter().getX() == 315 and (45 < circleOb.getCenter().getY() <= 195):
                 circleOb.move(0,-30)
+                
                 diceVal -= 1
-                remSteps -= 1
 
             elif circleOb.getCenter().getY() == 45 and (255 < circleOb.getCenter().getX() <= 315):
                 circleOb.move(-30,0)
+                
                 diceVal -= 1
-                remSteps -= 1
             
             elif circleOb.getCenter().getX() == 255 and ( 45 <= circleOb.getCenter().getY () < 195):
                 circleOb.move(0,30)
+                
                 diceVal -= 1
-                remSteps -= 1
 
             elif circleOb.getCenter().getX() == 255 and circleOb.getCenter().getY() == 195:
                 circleOb.move(-30,30)
+               
                 diceVal -= 1
-                remSteps -= 1
+
+            self.updateSteps(diceVal)
 
 
 

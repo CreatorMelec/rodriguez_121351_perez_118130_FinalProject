@@ -17,7 +17,6 @@ class Game:
 
     def playGame(self, win):
 
-        remSteps = chip()
 
         rollButton = Button(win, Point(720.0, 45),80, 30, "Roll Dice")
         quitButton = Button(win, Point(720.0, 510),80, 30, "QUIT")
@@ -25,91 +24,102 @@ class Game:
         quitButton.activate()
 
         pt = win.getMouse()
+        turn = 0
 
         while not quitButton.clicked(pt):
 
-            for i in range(4):
-                if i == 0:
-                    if rollButton.clicked(pt):
-                        print("red")
-                        dice1, dice2 = self.rollDice(win)
-                        if self.player.returnChips() > 0:
-                            checkMove, dice = self.startHome(dice1, dice2, "red", win)
-                            if checkMove:
-                                sumDie = dice
-                                self.player.MovePiece(self.players[0].player, sumDie, "red", remSteps.returnSteps(), win)          
+            if turn == 0:
+                if self.playerWon(win):
+                    win.getMouse()
+                    win.close()
+                elif rollButton.clicked(pt):
+                    print("red")
+                    dice1, dice2 = self.rollDice(win)
+                    if self.player.returnChips() > 0:
+                        checkMove, dice = self.startHome(dice1, dice2, "red", win)
+                        if checkMove:
+                            sumDie = dice
+                            self.player.MovePiece(self.players[0].player, sumDie, "red", self.players[0].returnSteps(), win)     
+                             
                         elif self.player.returnChips() == 0:
                             sumDie = dice1 + dice2
-                            self.player.MovePiece(self.players[0].player, sumDie, "red", remSteps.returnSteps(), win)
-                        if self.playerWon(win):
-                            win.getMouse()
-                            win.close()
-                        pt = win.getMouse()
+                            self.player.MovePiece(self.players[0].player, sumDie, "red", self.players[0].returnSteps(), win)
+                           
+                pt = win.getMouse()
+                turn += 1
+                print(turn)
 
-                elif i == 1:
-                    if rollButton.clicked(pt):
-                        print("blue")
-                        dice1, dice2 = self.rollDice( win)
-                        if self.player.returnChips() > 0:
-                            checkMove, dice = self.startHome(dice1, dice2, "blue", win)
-                            if checkMove:
-                                sumDie = dice
-                                self.player.MovePiece(self.players[1].player, sumDie, "blue", remSteps.returnSteps(), win)
-                                        
-                        elif self.player.returnChips() == 0:
-                            sumDie = dice1 + dice2
-                            self.player.MovePiece(self.players[1].player, sumDie, "blue", remSteps.returnSteps(), win)
-                                
-                        if self.playerWon(win):
-                            win.getMouse()
-                            win.close()
-                        pt = win.getMouse()
+            if turn == 1:
+                if self.playerWon(win):
+                    win.getMouse()
+                    win.close()
+                elif rollButton.clicked(pt):
+                    print("blue")
+                    dice1, dice2 = self.rollDice( win)
+                    if self.player.returnChips() > 0:
+                        checkMove, dice = self.startHome(dice1, dice2, "blue", win)
+                        if checkMove:
+                            sumDie = dice
+                            self.player.MovePiece(self.players[1].player, sumDie, "blue", self.players[1].returnSteps(), win)
+                                          
+                    elif self.player.returnChips() == 0:
+                        sumDie = dice1 + dice2
+                        self.player.MovePiece(self.players[1].player, sumDie, "blue", self.players[1].returnSteps(), win)
+                          
+                pt = win.getMouse()
+                turn += 1
+                print(turn)
 
                 
-                elif i == 2:
-                    if rollButton.clicked(pt):
-                        print("green")
-                        dice1, dice2 = self.rollDice(win)
-                                
-                        if self.player.returnChips() > 0:
-                            checkMove, dice = self.startHome(dice1, dice2, "green", win)
-                            if checkMove:
-                                sumDie = dice
-                                self.player.MovePiece(self.players[2].player, sumDie, "green", remSteps.returnSteps(), win)
-                                        
-                        elif self.player.returnChips() == 0:
-                            sumDie = dice1 + dice2
-                            self.player.MovePiece(self.players[2].player, sumDie, "green", remSteps.returnSteps(), win)
-                                
-                        if self.playerWon(win):
+            if turn == 2:
+                if self.playerWon(win):
                             win.getMouse()
                             win.close()
-                                        
-                            pt = win.getMouse()
-
-                elif i == 3:
-                    if rollButton.clicked(pt):
-                        print("yellow")
-                        dice1, dice2 = self.rollDice(win)    
-                        if self.player.returnChips() > 0:
-                            checkMove, dice = self.startHome(dice1, dice2, "yellow", win)
-                            if checkMove:
-                                sumDie = dice
-                                self.player.MovePiece(self.players[3].player, sumDie, "yellow", remSteps.returnSteps(), win)
+                elif rollButton.clicked(pt):
+                    print("green")
+                    dice1, dice2 = self.rollDice(win)    
+                    if self.player.returnChips() > 0:
+                        checkMove, dice = self.startHome(dice1, dice2, "green", win)
+                        if checkMove:
+                            sumDie = dice
+                            self.player.MovePiece(self.players[2].player, sumDie, "green", self.players[2].returnSteps(), win)
                                     
                         elif self.player.returnChips() == 0:
                             sumDie = dice1 + dice2
-                            self.player.MovePiece(self.players[3].player, sumDie, "yellow", remSteps.returnSteps(), win)
-                        
-                        if self.playerWon(win):
-                            win.getMouse()
-                            win.close()
-                        
-                        pt = win.getMouse()
-                
-                
+                            self.player.MovePiece(self.players[2].player, sumDie, "green", self.players[2].returnSteps(), win)
+                                  
+                    pt = win.getMouse()
+                turn += 1
+                print(turn)
 
-                      
+            if turn == 3:
+                if self.playerWon(win):
+                        win.getMouse()
+                        win.close()
+                elif rollButton.clicked(pt):
+                    print("yellow")
+                    dice1, dice2 = self.rollDice(win)    
+                    if self.player.returnChips() > 0:
+                        checkMove, dice = self.startHome(dice1, dice2, "yellow", win)
+                        if checkMove:
+                            sumDie = dice
+                            self.player.MovePiece(self.players[3].player, sumDie, "yellow", self.players[3].returnSteps(), win)
+                               
+                        elif self.player.returnChips() == 0:
+                            sumDie = dice1 + dice2
+                            self.player.MovePiece(self.players[3].player, sumDie, "yellow", self.players[3].returnSteps(), win)
+                               
+                    pt = win.getMouse()
+                turn += 1
+                print(turn)
+                    
+            if turn == 4:
+                turn = 0
+                print(turn)
+            
+                
+                
+           
             
     def playerWon(self, win):
 

@@ -8,6 +8,5 @@ class Dice:
     def rollDie(self):
         self.dice = random.randint(1,6)
         
-
     def diceValue(self):
         return self.dice
