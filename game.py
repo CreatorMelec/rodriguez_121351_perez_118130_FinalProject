@@ -35,7 +35,7 @@ class Game:
                     if self.players[0].returnChips() > 0:
                         checkMove, dice = self.startHome(dice1, dice2, "red", win)
                         if checkMove:
-                            self.players[0].MovePiece(self.players[0].player, dice, "red", self.players[0].returnSteps(), win) 
+                            self.players[0].MovePiece(self.players[0].player, 54, "red", self.players[0].returnSteps(), win) 
                             self.eatPlayer("red",win) 
                                                    
                     elif self.players[0].returnChips() == 0:
@@ -315,6 +315,15 @@ class Game:
         eat.draw(win)
         win.getMouse()
         eat.undraw()
+    
+    def oneDice(self, dice1, dice2):
+        if dice1 or dice2 == 1:
+            if dice1 == 1:
+                return True, dice1
+            elif dice2 == 1:
+                return True, dice2
+        else:
+            return False, dice1
 
             
 

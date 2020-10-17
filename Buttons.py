@@ -32,3 +32,4 @@ class Button:
         self.label.setFill("darkgrey")
         self.rect.setWidth(1)
         self.active = False
+
