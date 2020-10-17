@@ -14,8 +14,4 @@ def main():
     field.board(win)
     game.playGame(win)
 
-
-    #win.getMouse()
-    #win.close()
-
 main()
