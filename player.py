@@ -1,15 +1,8 @@
 from graphics import *
-from chip import chip
-
-# 64 para llegar a la base del home
-# 7 rojos para llegar a home
 
 class Player:
 
     def __init__(self):
-        self.chips = []
-        for x in range(4):
-            self.chips.append(chip())
         self.availableChips = 1
         self.player = Circle(Point(0, 0), 5)
         self.pieces = 0
@@ -39,8 +32,7 @@ class Player:
         self.availableChips = 1
         self.remainingSteps = 60
 
-    def MovePiece(self, circleOb, diceVal, dice1, dice2, color, remSteps, win):  # remSteps = 80
-        # self.updateSteps(diceVal)
+    def MovePiece(self, circleOb, diceVal, dice1, dice2, color, remSteps, win):
         while diceVal != 0:
 
             finalSteps = self.returnSteps()
@@ -220,7 +212,7 @@ class Player:
                     diceVal = 0
 
 
-
+            #green home
             elif 315 < circleOb.getCenter().getX() <= 495 and circleOb.getCenter().getY() == 255 and color == "green" and finalSteps == 6:
                 if diceVal > 6:
                     diceVal = 0
