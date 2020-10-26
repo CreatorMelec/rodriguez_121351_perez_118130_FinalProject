@@ -85,7 +85,7 @@ class Game:
                         turn += 1
                         counter = 0
 
-                    if self.players[0].playerWon(self.players[0].piecesInHome(), win):
+                    if self.players[1].playerWon(self.players[1].piecesInHome(), win):
                         win.getMouse()
                         win.close()
 
