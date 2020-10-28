@@ -1,8 +1,7 @@
 from graphics import *
 from game import Game
-from dieview import DieView
-from board import Board
 from Buttons import Button
+from inheritanceBoard import inheritanceBoard
 
 
 def main():
@@ -20,10 +19,11 @@ def main():
     while not quitButton.clicked(pt):
         window.close()
         win = GraphWin("Parchessi", 820, 620)
-        field = Board()
+        field = inheritanceBoard()
         game = Game()
 
         field.board(win)
         game.playGame(win)
+
 
 main()

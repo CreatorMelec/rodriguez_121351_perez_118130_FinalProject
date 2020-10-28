@@ -1,9 +1,9 @@
 from graphics import *
 from Dice import Dice
-from dieview import DieView
+from ColorDieView import ColorDieView
 from player import Player
 from Buttons import Button
-from board import Board
+from inheritanceBoard import inheritanceBoard
 
 
 class Game:
@@ -13,7 +13,7 @@ class Game:
         self.players = []
         for x in range(4):
             self.players.append(Player())
-        self.board = Board()
+        self.board = inheritanceBoard()
 
     def playGame(self, win):
 
@@ -30,17 +30,19 @@ class Game:
 
             if turn == 0:
                 if rollButton.clicked(pt):
-                    self.board.playerTurn("Red",win)
+                    self.board.playerTurn("Red", win)
                     dice1, dice2 = self.rollDice(win)
                     if self.players[0].returnChips() > 0:
                         checkMove, dice = self.startHome(dice1, dice2, "red", win)
                         if checkMove:
-                            self.players[0].MovePiece(self.players[0].player, dice, dice1,dice2, "red", self.players[0].returnSteps(),win)
+                            self.players[0].MovePiece(self.players[0].player, dice, dice1, dice2, "red",
+                                                      self.players[0].returnSteps(), win)
                             self.eatPlayer("red", win)
 
                     elif self.players[0].returnChips() == 0:
                         dice = dice1 + dice2
-                        self.players[0].MovePiece(self.players[0].player, dice, dice1,dice2, "red", self.players[0].returnSteps(),win)
+                        self.players[0].MovePiece(self.players[0].player, dice, dice1, dice2, "red",
+                                                  self.players[0].returnSteps(), win)
                         self.eatPlayer("red", win)
 
                     if self.doubleTurn(dice1, dice2):
@@ -61,7 +63,7 @@ class Game:
                             skip.setSize(16)
                             skip.draw(win)
                             win.getMouse()
-                            skip.undraw()                  
+                            skip.undraw()
                     else:
                         turn += 1
                         counter = 0
@@ -81,16 +83,18 @@ class Game:
             elif turn == 1:
 
                 if rollButton.clicked(pt):
-                    self.board.playerTurn("Blue",win)
+                    self.board.playerTurn("Blue", win)
                     dice1, dice2 = self.rollDice(win)
                     if self.players[1].returnChips() > 0:
                         checkMove, dice = self.startHome(dice1, dice2, "blue", win)
                         if checkMove:
-                            self.players[1].MovePiece(self.players[1].player, dice, dice1,dice2, "blue",self.players[1].returnSteps(), win)
+                            self.players[1].MovePiece(self.players[1].player, dice, dice1, dice2, "blue",
+                                                      self.players[1].returnSteps(), win)
                             self.eatPlayer("blue", win)
 
                     elif self.players[1].returnChips() == 0:
-                        self.players[1].MovePiece(self.players[1].player, dice, dice1,dice2, "blue", self.players[1].returnSteps(),win)
+                        self.players[1].MovePiece(self.players[1].player, dice, dice1, dice2, "blue",
+                                                  self.players[1].returnSteps(), win)
                         self.eatPlayer("blue", win)
 
                     if self.doubleTurn(dice1, dice2):
@@ -111,7 +115,7 @@ class Game:
                             skip.draw(win)
                             win.getMouse()
                             skip.undraw()
-                        
+
                     else:
                         turn += 1
                         counter = 0
@@ -133,17 +137,19 @@ class Game:
             elif turn == 2:
 
                 if rollButton.clicked(pt):
-                    self.board.playerTurn("Green",win)
+                    self.board.playerTurn("Green", win)
                     dice1, dice2 = self.rollDice(win)
                     if self.players[2].returnChips() > 0:
                         checkMove, dice = self.startHome(dice1, dice2, "green", win)
                         if checkMove:
-                            self.players[2].MovePiece(self.players[2].player, dice, dice1,dice2, "green",self.players[2].returnSteps(), win)
+                            self.players[2].MovePiece(self.players[2].player, dice, dice1, dice2, "green",
+                                                      self.players[2].returnSteps(), win)
                             self.eatPlayer("green", win)
 
                     elif self.players[2].returnChips() == 0:
                         dice = dice1 + dice2
-                        self.players[2].MovePiece(self.players[2].player, dice, dice1,dice2, "green", self.players[2].returnSteps(),win)
+                        self.players[2].MovePiece(self.players[2].player, dice, dice1, dice2, "green",
+                                                  self.players[2].returnSteps(), win)
                         self.eatPlayer("green", win)
 
                     if self.doubleTurn(dice1, dice2):
@@ -164,7 +170,7 @@ class Game:
                             skip.draw(win)
                             win.getMouse()
                             skip.undraw()
-                        
+
                     else:
                         turn += 1
                         counter = 0
@@ -186,16 +192,18 @@ class Game:
             elif turn == 3:
 
                 if rollButton.clicked(pt):
-                    self.board.playerTurn("Yellow",win)
+                    self.board.playerTurn("Yellow", win)
                     dice1, dice2 = self.rollDice(win)
                     if self.players[3].returnChips() > 0:
                         checkMove, dice = self.startHome(dice1, dice2, "yellow", win)
                         if checkMove:
-                            self.players[3].MovePiece(self.players[3].player, dice, dice1,dice2, "yellow",self.players[3].returnSteps(), win)
+                            self.players[3].MovePiece(self.players[3].player, dice, dice1, dice2, "yellow",
+                                                      self.players[3].returnSteps(), win)
                             self.eatPlayer("yellow", win)
 
                     elif self.players[3].returnChips() == 0:
-                        self.players[3].MovePiece(self.players[3].player, dice, dice1,dice2, "yellow", self.players[3].returnSteps(),win)
+                        self.players[3].MovePiece(self.players[3].player, dice, dice1, dice2, "yellow",
+                                                  self.players[3].returnSteps(), win)
                         self.eatPlayer("yellow", win)
 
                     if self.doubleTurn(dice1, dice2):
@@ -216,7 +224,7 @@ class Game:
                             skip.draw(win)
                             win.getMouse()
                             skip.undraw()
-                        
+
                     else:
                         turn += 1
                         counter = 0
@@ -244,11 +252,11 @@ class Game:
         dado = Dice()
         dado.rollDie()
         diceVal = dado.diceValue()
-        viewDice = DieView(win, Point(690.0, 120.0), 50)
+        viewDice = ColorDieView(win, Point(690.0, 120.0), 50)
         viewDice.setValue(diceVal)
         dado.rollDie()
         diceVal2 = dado.diceValue()
-        viewDice2 = DieView(win, Point(760.0, 120.0), 50)
+        viewDice2 = ColorDieView(win, Point(760.0, 120.0), 50)
         viewDice2.setValue(diceVal2)
         return diceVal, diceVal2
 
@@ -286,9 +294,9 @@ class Game:
                     return True, diceVal2
                 else:
                     self.players[3].updateChips()
-                    return True, diceVal   
+                    return True, diceVal
         else:
-        
+
             moveDice = diceVal + diceVal2
             return False, moveDice
 
@@ -306,57 +314,57 @@ class Game:
                 self.players[1].player.undraw()
                 self.players[1].reset()
                 self.players[1] = Player()
-                self.eatenMessage("Blue",win)
+                self.eatenMessage("Blue", win)
             elif self.players[0].player.getCenter().getX() == self.players[2].player.getCenter().getX() and \
                     self.players[0].player.getCenter().getY() == self.players[2].player.getCenter().getY():
                 self.players[2].player.undraw()
                 self.players[2].reset()
                 self.players[2] = Player()
-                self.eatenMessage("Green",win)
+                self.eatenMessage("Green", win)
             elif self.players[0].player.getCenter().getX() == self.players[3].player.getCenter().getX() and \
                     self.players[0].player.getCenter().getY() == self.players[3].player.getCenter().getY():
                 self.players[3].player.undraw()
                 self.players[3].reset()
                 self.players[3] = Player()
-                self.eatenMessage("Yellow",win)
+                self.eatenMessage("Yellow", win)
         elif color == "blue":
             if self.players[1].player.getCenter().getX() == self.players[0].player.getCenter().getX() and self.players[
                 1].player.getCenter().getY() == self.players[0].player.getCenter().getY():
                 self.players[0].player.undraw()
                 self.players[0].reset()
                 self.players[0] = Player()
-                self.eatenMessage("Red",win)
+                self.eatenMessage("Red", win)
             elif self.players[1].player.getCenter().getX() == self.players[2].player.getCenter().getX() and \
                     self.players[1].player.getCenter().getY() == self.players[2].player.getCenter().getY():
                 self.players[2].player.undraw()
                 self.players[2].reset()
                 self.players[2] = Player()
-                self.eatenMessage("Green",win)
+                self.eatenMessage("Green", win)
             elif self.players[1].player.getCenter().getX() == self.players[3].player.getCenter().getX() and \
                     self.players[1].player.getCenter().getY() == self.players[3].player.getCenter().getY():
                 self.players[3].player.undraw()
                 self.players[3].reset()
                 self.players[3] = Player()
-                self.eatenMessage("Yellow",win)
+                self.eatenMessage("Yellow", win)
         elif color == "green":
             if self.players[2].player.getCenter().getX() == self.players[0].player.getCenter().getX() and self.players[
                 2].player.getCenter().getY() == self.players[0].player.getCenter().getY():
                 self.players[0].player.undraw()
                 self.players[0].reset()
                 self.players[0] = Player()
-                self.eatenMessage("Red",win)
+                self.eatenMessage("Red", win)
             elif self.players[2].player.getCenter().getX() == self.players[1].player.getCenter().getX() and \
                     self.players[2].player.getCenter().getY() == self.players[1].player.getCenter().getY():
                 self.players[1].player.undraw()
                 self.players[1].reset()
                 self.players[1] = Player()
-                self.eatenMessage("Blue",win)
+                self.eatenMessage("Blue", win)
             elif self.players[2].player.getCenter().getX() == self.players[3].player.getCenter().getX() and \
                     self.players[2].player.getCenter().getY() == self.players[3].player.getCenter().getY():
                 self.players[3].player.undraw()
                 self.players[3].reset()
                 self.players[3] = Player()
-                self.eatenMessage("Yellow",win)
+                self.eatenMessage("Yellow", win)
 
         elif color == "yellow":
             if self.players[3].player.getCenter().getX() == self.players[0].player.getCenter().getX() and self.players[
@@ -364,19 +372,19 @@ class Game:
                 self.players[0].player.undraw()
                 self.players[0].reset()
                 self.players[0] = Player()
-                self.eatenMessage("Red",win)
+                self.eatenMessage("Red", win)
             elif self.players[3].player.getCenter().getX() == self.players[2].player.getCenter().getX() and \
                     self.players[3].player.getCenter().getY() == self.players[2].player.getCenter().getY():
                 self.players[2].player.undraw()
                 self.players[2].reset()
                 self.players[2] = Player()
-                self.eatenMessage("Green",win)
+                self.eatenMessage("Green", win)
             elif self.players[3].player.getCenter().getX() == self.players[1].player.getCenter().getX() and \
                     self.players[3].player.getCenter().getY() == self.players[1].player.getCenter().getY():
                 self.players[1].player.undraw()
                 self.players[1].reset()
                 self.players[1] = Player()
-                self.eatenMessage("Blue",win)
+                self.eatenMessage("Blue", win)
 
     def eatenMessage(self, color, win):
         eat = Text(Point(720.0, 300), str(color) + " Player Eaten")
@@ -394,6 +402,8 @@ class Game:
                 return True, dice2
         else:
             return False, dice1
+
+
 
 
 

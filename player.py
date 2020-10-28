@@ -379,8 +379,6 @@ class Player:
             winner.setStyle("bold")
             winner.setSize(26)
             winner.draw(win)
-            win.getMouse()
-            win.close()
             return True
         else:
             return False
