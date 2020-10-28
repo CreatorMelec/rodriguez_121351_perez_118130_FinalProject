@@ -122,5 +122,11 @@ class Board:
         rightMenu.draw(win)
 
 
-
+    def playerTurn(self, color, win):
+        player = Text(Point(720.0, 300), str(color) + "'s Turn")
+        player.setStyle("bold")
+        player.setSize(16)
+        player.draw(win)
+        win.getMouse()
+        player.undraw()
    

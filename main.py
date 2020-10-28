@@ -2,16 +2,28 @@ from graphics import *
 from game import Game
 from dieview import DieView
 from board import Board
+from Buttons import Button
 
 
 def main():
 
+    gameImage = Image(Point(180,180), "parchessi.png")
+    window = GraphWin("Parchessi", 360,360)
+    gameImage.draw(window)
 
-    win = GraphWin("Parchessi", 820, 620)
-    field = Board()
-    game = Game()
+    playButton = Button(window, Point(180.0, 200), 80, 30, "Play")
+    quitButton = Button(window, Point(180.0, 240), 80, 30, "QUIT")
+    playButton.activate()
+    quitButton.activate()
 
-    field.board(win)
-    game.playGame(win)
+    pt = window.getMouse()
+    while not quitButton.clicked(pt):
+        window.close()
+        win = GraphWin("Parchessi", 820, 620)
+        field = Board()
+        game = Game()
+
+        field.board(win)
+        game.playGame(win)
 
 main()
