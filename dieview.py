@@ -1,3 +1,6 @@
+"""Code extracted from Python Programming: An introduction to Computer Science by John M. Zelle, Ph.D.
+used to create the dices with their generated values"""
+#imports of all the classes used in this interactive game
 from graphics import *
 
 class DieView:

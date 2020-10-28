@@ -1,3 +1,7 @@
+"""Code created by Elimelec Rodriguez and Cedric Perez
+This code introduces a very popular and known game, Parchessi or as some might know it, Trouble
+in a simpler way, yet recognizable and fun way"""
+#imports of all the classes used in this interactive game
 from graphics import *
 from Dice import Dice
 from ColorDieView import ColorDieView
@@ -6,81 +10,83 @@ from Buttons import Button
 from inheritanceBoard import inheritanceBoard
 
 
-class Game:
+class Game: #class to start game and its features
 
     def __init__(self):
-        self.player = Player()
-        self.players = []
+        self.player = Player() #creates object from class Player to be able to call the functions needed
+        self.players = [] #creates a list of objects from Player
         for x in range(4):
             self.players.append(Player())
-        self.board = inheritanceBoard()
+        self.board = inheritanceBoard() #creates object from Board to call functions needed
 
-    def playGame(self, win):
+    def playGame(self, win): #main function that runs the game
 
-        rollButton = Button(win, Point(720.0, 45), 80, 30, "Roll Dice")
+        #creates buttons for roll dice and quit
+        rollButton = Button(win, Point(720.0, 45), 80, 30, "Roll Dice") 
         quitButton = Button(win, Point(720.0, 510), 80, 30, "QUIT")
         rollButton.activate()
         quitButton.activate()
 
-        pt = win.getMouse()
-        turn = 0
-        counter = 0
+        pt = win.getMouse()#Gets the users click on which button
+        turn = 0 #variable used to create turns for each player
+        counter = 0 #variable used to keep count of the times the user gets a double die 
 
-        while not quitButton.clicked(pt):
+        while not quitButton.clicked(pt): #while the player doesn't click Quit the game continues
 
-            if turn == 0:
-                if rollButton.clicked(pt):
-                    self.board.playerTurn("Red", win)
-                    dice1, dice2 = self.rollDice(win)
-                    if self.players[0].returnChips() > 0:
-                        checkMove, dice = self.startHome(dice1, dice2, "red", win)
-                        if checkMove:
-                            self.players[0].MovePiece(self.players[0].player, dice, dice1, dice2, "red",
+            if turn == 0: #starts player red's turn
+                if rollButton.clicked(pt): #checks if the player clicks roll dice, if true then their turn proceeds
+                    self.board.playerTurn("Red", win) #calls the function that draws in the menu who's player's turn it is
+                    dice1, dice2 = self.rollDice(win) #calls the function to roll the dice and returns the values for each one
+                    if self.players[0].returnChips() > 0:#calls the function returnChips() to determine available chips in the player's home, if true then proceeds
+                        checkMove, dice = self.startHome(dice1, dice2, "red", win) #calls function startHome to check if the player rolled a 5 on either dice and returns the value of the other
+                        if checkMove:#true if the player rolled a 5 on either die
+                            self.players[0].MovePiece(self.players[0].player, dice, dice1, dice2, "red", #calls function that moves the player's piece according to the dice value returned after rolling 5
                                                       self.players[0].returnSteps(), win)
-                            self.eatPlayer("red", win)
+                            self.eatPlayer("red", win) #calls function that checks if the player ate another player
 
-                    elif self.players[0].returnChips() == 0:
-                        dice = dice1 + dice2
-                        self.players[0].MovePiece(self.players[0].player, dice, dice1, dice2, "red",
+                    elif self.players[0].returnChips() == 0: #calls function that checks the players available chips, if true then proceeds
+                        dice = dice1 + dice2 #sums both die values 
+                        self.players[0].MovePiece(self.players[0].player, dice, dice1, dice2, "red", # calls function that moves the player's piece according to the sum of both die
                                                   self.players[0].returnSteps(), win)
-                        self.eatPlayer("red", win)
+                        self.eatPlayer("red", win) #calls function that checks if the player ate another player
 
-                    if self.doubleTurn(dice1, dice2):
-                        counter += 1
-                        turn = 0
-                        turnAgain = Text(Point(720.0, 300), "Your turn again")
+                    if self.doubleTurn(dice1, dice2): #calls funciton to check both die values, if true then proceeds to create another turn
+                        counter += 1 #adds one to counter to keep track of doubles
+                        turn = 0 #sets turn = 0 so that its player Red's turn again
+                        #prints a text in the menu letting the player know its their turn again
+                        turnAgain = Text(Point(720.0, 300), "Your turn again") 
                         turnAgain.setStyle("bold")
                         turnAgain.setSize(16)
                         turnAgain.draw(win)
                         win.getMouse()
                         turnAgain.undraw()
 
-                        if counter == 2:
-                            turn += 1
-                            counter = 0
-                            skip = Text(Point(720.0, 300), "Next player's turn")
+                        if counter == 2: #once counter hits 2, the player's turn is skipped
+                            turn += 1 #adds one to turn to continue to next player
+                            counter = 0 #resets counter = 0
+                            skip = Text(Point(720.0, 300), "Next player's turn") #prints in the menu that it's the next player's turn
                             skip.setStyle("bold")
                             skip.setSize(16)
                             skip.draw(win)
                             win.getMouse()
                             skip.undraw()
-                    else:
-                        turn += 1
-                        counter = 0
-                        skip = Text(Point(720.0, 300), "Next player's turn")
+                    else: #if no double was rolled then proceeds
+                        turn += 1 #adds one to turn to continue to next player
+                        counter = 0 #resets counter = 0
+                        skip = Text(Point(720.0, 300), "Next player's turn")#prints in the menu that it's the next player's turn
                         skip.setStyle("bold")
                         skip.setSize(16)
                         skip.draw(win)
                         win.getMouse()
                         skip.undraw()
 
-                    if self.players[0].playerWon(self.players[0].piecesInHome(), win):
+                    if self.players[0].playerWon(self.players[0].piecesInHome(), win): #calls function that checks if the player won
                         win.getMouse()
-                        win.close()
+                        win.close() #closes the window if player won
 
-                    pt = win.getMouse()
+                    pt = win.getMouse() #resets the click for the next player
 
-            elif turn == 1:
+            elif turn == 1: #blue player's turn, everything works as mentioned above
 
                 if rollButton.clicked(pt):
                     self.board.playerTurn("Blue", win)
@@ -134,7 +140,7 @@ class Game:
 
 
 
-            elif turn == 2:
+            elif turn == 2: #green player's turn, everything works as mentioned above
 
                 if rollButton.clicked(pt):
                     self.board.playerTurn("Green", win)
@@ -189,7 +195,7 @@ class Game:
 
 
 
-            elif turn == 3:
+            elif turn == 3: #yellow player's turn, everything works as mentioned above
 
                 if rollButton.clicked(pt):
                     self.board.playerTurn("Yellow", win)
@@ -242,36 +248,40 @@ class Game:
                     pt = win.getMouse()
 
 
-            elif turn == 4:
+            elif turn == 4: #keeps the loop going starting back at the first player's turn
                 turn = 0
 
-                pt = win.getMouse()
+                pt = win.getMouse() #resets click 
 
+    #function that calls upon Dice class and ColorDieView to roll and draw the dice in the menu
     def rollDice(self, win):
 
-        dado = Dice()
-        dado.rollDie()
-        diceVal = dado.diceValue()
-        viewDice = ColorDieView(win, Point(690.0, 120.0), 50)
-        viewDice.setValue(diceVal)
+        dado = Dice() #object created from Dice class
+        dado.rollDie() #calls function that rolls the dice
+        diceVal = dado.diceValue() #variable used to hold the value of the dice 
+        viewDice = ColorDieView(win, Point(690.0, 120.0), 50) #calls the function that creates the dice in the menu 
+        viewDice.setValue(diceVal) #gives the value of the dice to the created dice so that the value is also drawn
+        #works as mentioned above
         dado.rollDie()
         diceVal2 = dado.diceValue()
         viewDice2 = ColorDieView(win, Point(760.0, 120.0), 50)
         viewDice2.setValue(diceVal2)
         return diceVal, diceVal2
 
+    #function that checks if one of the dice values is 5 to start the player at their home position
     def startHome(self, diceVal, diceVal2, color, win):
 
-        if diceVal == 5 or diceVal2 == 5:
-            if color == "red":
-                self.players[0].drawPlayer("red", win)
-                if diceVal == 5:
+        if diceVal == 5 or diceVal2 == 5: #checks both dice values, if there is a 5, then it proceeds
+            if color == "red": #checks the color of the player, then proceeds
+                self.players[0].drawPlayer("red", win) #calls the function that draws the player at their home position
+                #check conditions to see which die had the 5 and return the other die instead
+                if diceVal == 5: 
                     self.players[0].updateChips()
                     return True, diceVal2
                 else:
                     self.players[0].updateChips()
                     return True, diceVal
-            elif color == "blue":
+            elif color == "blue": #blue player, works as mentioned above
                 self.players[1].drawPlayer("blue", win)
                 if diceVal == 5:
                     self.players[1].updateChips()
@@ -279,7 +289,7 @@ class Game:
                 else:
                     self.players[1].updateChips()
                     return True, diceVal
-            elif color == "green":
+            elif color == "green": #green player, works as mentioned above
                 self.players[2].drawPlayer("green", win)
                 if diceVal == 5:
                     self.players[2].updateChips()
@@ -287,7 +297,7 @@ class Game:
                 else:
                     self.players[2].updateChips()
                     return True, diceVal
-            elif color == "yellow":
+            elif color == "yellow": #yellow player, works as mentioned above
                 self.players[3].drawPlayer("yellow", win)
                 if diceVal == 5:
                     self.players[3].updateChips()
@@ -295,11 +305,11 @@ class Game:
                 else:
                     self.players[3].updateChips()
                     return True, diceVal
-        else:
-
+        else: #if no die has a 5, then returns false and the sum of both die
             moveDice = diceVal + diceVal2
             return False, moveDice
 
+    #function that checks if both die are the same
     def doubleTurn(self, dice1, dice2):
 
         if dice1 == dice2:
@@ -307,6 +317,7 @@ class Game:
         else:
             return False
 
+    #function that checks the position of the player calling and checks if there is an existing player there and undraws that player
     def eatPlayer(self, color, win):
         if color == "red":
             if self.players[0].player.getCenter().getX() == self.players[1].player.getCenter().getX() and self.players[
@@ -386,6 +397,7 @@ class Game:
                 self.players[1] = Player()
                 self.eatenMessage("Blue", win)
 
+    #function that displays the player that was eaten in the menu 
     def eatenMessage(self, color, win):
         eat = Text(Point(720.0, 300), str(color) + " Player Eaten")
         eat.setStyle("bold")
@@ -393,7 +405,8 @@ class Game:
         eat.draw(win)
         win.getMouse()
         eat.undraw()
-
+    
+    #function used to check for a 1 on either die, used to be able to move from the last place on the board to the home
     def oneDice(self, dice1, dice2):
         if dice1 or dice2 == 1:
             if dice1 == 1:

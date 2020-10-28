@@ -1,3 +1,6 @@
+"""Code extracted from Python Programming: An introduction to Computer Science by John M. Zelle, Ph.D.
+used to create the buttons for each option in the menus"""
+#imports of all the classes used in this interactive game
 from graphics import *
 
 class Button:
