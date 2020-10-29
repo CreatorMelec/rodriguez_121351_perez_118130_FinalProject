@@ -14,9 +14,10 @@ This code presents elements such as inheritance with its board and dices, so tha
 
 Future work: 
 For this code to be an almost exact replica of the traditional board game, Parcheesi or Trouble:
-1. There should be added 3 more available chips to each player.
+1. 3 more chips should be added to each player.
 2. If a player has a chip outside of their base and rolls a 5, they get to choose whether they move a new chip out of base or their existing chip on the board.
 3. When a player rolls the die, they get to choose which of their existing chips moves on the board.
+4. Fully make the classes Game and Player customizable.
 
 PS: IDE used for this program was VS Code, all images were successfully imported from the project folder
 ![Screenshot](IntroGame.jpeg)
