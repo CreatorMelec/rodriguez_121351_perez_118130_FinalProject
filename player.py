@@ -353,11 +353,11 @@ class Player:
             self.player.draw(win)
 
     #function that checks the pieces in home and returns if the player won
-    def playerWon(self, pieces, win):
+    def playerWon(self, pieces, color, win):
         if pieces == 1:
-            winner = Text(Point(720.0, 300), "You WON!")
+            winner = Text(Point(720.0, 300), str(color) + " player WON!")
             winner.setStyle("bold")
-            winner.setSize(26)
+            winner.setSize(14)
             winner.draw(win)
             return True
         else:
