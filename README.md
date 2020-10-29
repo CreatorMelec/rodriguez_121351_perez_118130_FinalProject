@@ -16,8 +16,9 @@ For this code to be an almost exact replica of the traditional board game, Parch
 2. If a player has a chip outside of their base and rolls a 5, they get to choose whether they move a new chip out of base or their existing chip on the board.
 3. When a player rolls the die, they get to choose which of their existing chips moves on the board.
 
+PS: IDE used for this program was VS Code, all images were successfully imported from the project folder
 ![Screenshot](IntroGame.jpeg)
 
-![Screenshot](MainGame.jpeg)
+![Screenshot](MainGame.png)
 
-![Screenshot](PlayerWon.jpeg)
+![Screenshot](PlayerWon.png)
