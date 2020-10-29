@@ -18,6 +18,6 @@ For this code to be an almost exact replica of the traditional board game, Parch
 
 ![Screenshot](IntroGame.jpeg)
 
-![Screenshot](MainGame.jpeg)
+![Screenshot](MainGame.png)
 
-![Screenshot](PlayerWon.jpeg)
+![Screenshot](PlayerWon.png)
