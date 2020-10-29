@@ -1,6 +1,8 @@
 # rodriguez_121351_perez_118130_FinalProject
 This code was created by Elimelec Rodriguez and Cedric Perez as a final project for our course CECS 3210 Advanced Programming. 
-All the work presented was done by both of the integrants of the group and was pushed onto this specific github repository: CreatorMelec.
+All the work presented was done by both of the integrants of the group and was pushed onto this specific github repository: CreatorMelec by me, Elimelec.
+We had no previous knowledge of how to add a contributor, therefore, the only one present was CreatorMelec, but CedricRenier was also a contributor to this project.
+His github username is CedricRenierPerez.
 The following is based on a game similar to Parcheesi or Trouble, that involves four players with their own specific colors,
 moving around a designated board until they reach their home base. Each player has one chip at their disposal,
 that can only leave their base when they roll a 5 on a die. All players are given two dies. If either one is a 5, they begin to move on the board.
