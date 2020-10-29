@@ -24,4 +24,4 @@ PS: IDE used for this program was VS Code, all images were successfully imported
 
 ![Screenshot](MainGame.png)
 
-![Screenshot](PlayerWon.png)
+![Screenshot](winner.png)
