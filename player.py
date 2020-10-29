@@ -231,7 +231,7 @@ class Player:
                     circleOb.move(0.0, 30.0)
                     diceVal -= 1
 
-            elif circleOb.getCenter().getX() == 285.0 and 175 <= circleOb.getCenter().getY() < 255 and color == "yellow" and finalSteps == 2:
+            elif circleOb.getCenter().getX() == 285.0 and 165 <= circleOb.getCenter().getY() < 255 and color == "yellow" and finalSteps == 2:
                 if diceVal > 2:
                     diceVal = 0
                 elif diceVal <= 2:
@@ -239,7 +239,7 @@ class Player:
                     circleOb.move(0.0, 30.0)
                     diceVal -= 1
 
-            elif circleOb.getCenter().getX() == 285.0 and 205 <= circleOb.getCenter().getY() < 255 and color == "yellow" and finalSteps == 1:
+            elif circleOb.getCenter().getX() == 285.0 and 195 <= circleOb.getCenter().getY() < 255 and color == "yellow" and finalSteps == 1:
                 if dice1 > 1 and dice2 > 1:
                     diceVal = 0
                 if dice1 == 1 or dice2 == 1 or diceVal == 1:
